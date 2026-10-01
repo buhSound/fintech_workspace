@@ -1,17 +1,13 @@
-# fintech_workspace
+# Maqueta Funcional: Fintech Workspace
 
-A new Flutter project.
+Maqueta funcional móvil desarrollada para el sector financiero, orientada a la gestion de subscripciones de aplicaciones.
 
-## Getting Started
+## Arquitectura del Software y Explicación de Decisiones Técnicas
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Estructura de los Archivos
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* 'domain/models': Contiene la lógica de la aplicacion
+* 'ui/screens': Vistas principales del flujo
+* 'ui/widgets': Componentes reutilizables
+* 'ui/theme': Identidad Visual
