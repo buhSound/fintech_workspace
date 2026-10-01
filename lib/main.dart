@@ -1,3 +1,4 @@
+import 'package:fintech_workspace/ui/screens/master_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'ui/theme/app_theme.dart';
 void main(){
@@ -12,8 +13,8 @@ class FintechWorkspaceApp extends StatelessWidget{
     return MaterialApp(
       title: 'Fintech Workspace',
       debugShowCheckedModeBanner: false,
-
       theme: AppTheme.lightTheme,
+      home: const MasterListScreen(),
     );
   }
 }
