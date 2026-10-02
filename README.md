@@ -13,3 +13,7 @@ Maqueta funcional móvil desarrollada para el sector financiero, orientada a la 
 * 'ui/screens': Vistas principales del flujo
 * 'ui/widgets': Componentes reutilizables
 * 'ui/theme': Identidad Visual
+
+# Presentación Software
+
+* **Link:** https://youtu.be/tnGEbksoXHI
