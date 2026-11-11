@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'services/secure_storage_service.dart';
 import 'services/biometric_auth_service.dart';
 import 'viewmodels/auth_viewmodel.dart';
 import 'ui/screens/login_screen.dart';
+import 'services/device_interop_service.dart';
+import 'ui/screens/root_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +23,18 @@ class FintechApp extends StatelessWidget{
             create: (_) => BiometricAuthService(),
           ),
 
+          Provider<SecureStorageService>(
+            create: (_) => SecureStorageService(),
+          ),
+
+          Provider<DeviceInteropService>(
+            create: (_) => DeviceInteropService(),
+          ),
+
           ChangeNotifierProvider<AuthViewModel>(
             create: (context) => AuthViewModel(
                 biometricService: context.read<BiometricAuthService>(),
+                secureStorage: context.read<SecureStorageService>(),
             ),
           ),
         ],
@@ -32,8 +43,9 @@ class FintechApp extends StatelessWidget{
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+          useMaterial3: true,
         ),
-        home: const LoginScreen(),
+        home: const RootScreen(),
       ),
     );
   }
