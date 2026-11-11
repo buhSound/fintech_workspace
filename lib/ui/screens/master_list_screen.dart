@@ -7,6 +7,8 @@ import '../widgets/subscription_card.dart';
 import 'subscription_detail_screen.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 
+import 'add_subscription_screen.dart';
+
 class MasterListScreen extends StatelessWidget{
     const MasterListScreen({super.key});
 
@@ -67,22 +69,54 @@ class MasterListScreen extends StatelessWidget{
                     Expanded(
                         child: ListView.builder(
                             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                            itemCount: mockSubscriptions.length,
+                            itemCount: subscriptions.length,
                             itemBuilder: (context, index) {
-                                final subscription = mockSubscriptions[index];
+                                final subscription = subscriptions[index];
+                                
+                                return Dismissible(
+                                    key: Key(subscription.id),
+                                    direction: DismissDirection.endToStart,
+                                    
+                                    background: Container(
+                                        alignment: Alignment.centerRight,
+                                        padding: const EdgeInsets.only(right: 24.0),
+                                        margin: const EdgeInsets.only(bottom: 16.0),
+                                        decoration: BoxDecoration(
+                                            color: Theme.of(context). colorScheme.error,
+                                            borderRadius: BorderRadius.circular(16),
+                                        ),
+                                        child: const Icon(Icons.delete, color: Colors.white, size: 28),
+                                    ),
+                                    
+                                    onDismissed: (direction) {
+                                        context.read<SubscriptionViewModel>().removeSubscription(subscription.id);
 
-                                return SubscriptionCard(
-                                    subscription: subscription,
-                                    onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => SubscriptionDetailScreen(
-                                                    subscription: subscription
+                                        ScaffoldMessenger.of(context).clearSnackBars();
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                                content: Text('${subscription.name} eliminada'),
+                                                action: SnackBarAction(
+                                                    label: 'Deshacer',
+                                                    onPressed: () {
+                                                        context.read<SubscriptionViewModel>().addSubscription(subscription);
+                                                    },
                                                 ),
                                             ),
                                         );
                                     },
+                                    child: SubscriptionCard(
+                                        subscription: subscription,
+                                        onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => SubscriptionDetailScreen(
+                                                        subscription: subscription,
+                                                    )
+                                                )
+                                            );
+                                        }
+                                    )
                                 );
                             },
                         ),
@@ -91,7 +125,12 @@ class MasterListScreen extends StatelessWidget{
             ),
             floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
-                    // TODO: Implementar vista para añadir suscripción
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddSubscriptionScreen(),
+                        ),
+                    );
                 },
                 icon: const Icon(Icons.add),
                 label: const Text('Nueva'),
