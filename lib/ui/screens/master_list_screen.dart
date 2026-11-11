@@ -1,3 +1,4 @@
+import 'package:fintech_workspace/viewmodels/subscription_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,11 +12,9 @@ class MasterListScreen extends StatelessWidget{
 
     @override 
     Widget build(BuildContext context){
-
-        final int totalGasto = mockSubscriptions.fold<int>(
-            0,
-            (sum, item) => sum + item.monthlyCost
-        );
+        final subscriptionVM = context.watch<SubscriptionViewModel>();
+        final subscriptions = subscriptionVM.subscriptions;
+        final totalGasto = subscriptionVM.totalMonthlyCost;
 
         return Scaffold(
             appBar: AppBar(

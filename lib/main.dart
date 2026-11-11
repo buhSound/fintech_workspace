@@ -6,6 +6,7 @@ import 'viewmodels/auth_viewmodel.dart';
 import 'ui/screens/login_screen.dart';
 import 'services/device_interop_service.dart';
 import 'ui/screens/root_screen.dart';
+import 'viewmodels/subscription_viewmodel.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,10 +34,14 @@ class FintechApp extends StatelessWidget{
 
           ChangeNotifierProvider<AuthViewModel>(
             create: (context) => AuthViewModel(
-                biometricService: context.read<BiometricAuthService>(),
-                secureStorage: context.read<SecureStorageService>(),
+              biometricService: context.read<BiometricAuthService>(),
+              secureStorage: context.read<SecureStorageService>(),
             ),
           ),
+
+          ChangeNotifierProvider<SubscriptionViewModel>(
+            create: (_) => SubscriptionViewModel(),
+            ),
         ],
       child: MaterialApp(
         title: 'Fintech Workspace',
