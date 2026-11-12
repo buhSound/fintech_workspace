@@ -53,7 +53,7 @@ class FintechApp extends StatelessWidget{
             ),
         ],
       child: MaterialApp(
-        title: 'Fintech Workspace',
+        title: 'Merxsell',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),

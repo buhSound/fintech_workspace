@@ -66,6 +66,11 @@ class AuthViewModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  void loginWithoutBiometrics(){
+    _isAuthenticated = true;
+    notifyListeners();
+  }
+
   void _setError(String message){
     _errorMessage = message;
     _isLoading = false;

@@ -110,8 +110,7 @@ flutter_launcher_icons:
   min_sdk_android: 21
 
 flutter_native_splash:
-  color: "#FFFFFF"
+  color: "#1E88E5"
   image: "assets/images/wolf.png"
-  android_12:
-    image: "assets/images/wolf.png"
-    icon_background_color: "#FFFFFF"
+  android: true
+  ios: true

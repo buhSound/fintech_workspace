@@ -12,7 +12,7 @@
     </queries>
 
     <application
-        android:label="fintech_workspace"
+        android:label="Merxsell"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

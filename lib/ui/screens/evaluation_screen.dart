@@ -58,13 +58,69 @@ class _EvaluationScreenState extends State<EvaluationScreen> {
       }
     });
 
-    final interop = context.read<DeviceInteropService>();
-    interop.shareContent(buffer.toString(), subject: 'Resultados de Evaluación de Usuario');
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Evita que se cierre tocando fuera del cuadro
+      builder: (BuildContext dialogContext) {
+        return Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // Se adapta al contenido
+              children: [
+                // Renderiza la imagen estática o el GIF animado (que actúa como video)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    'assets/images/greece.jpg', // Tu archivo visual
+                    height: 120,
+                    width: 120,
+                    fit: BoxFit.cover,
+                    // Si la imagen no se encuentra, muestra un icono nativo por defecto
+                    errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.check_circle, color: Colors.green, size: 100),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  '¡Evaluación Completada!',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Gracias por responder la encuesta. Estos resultados nos serviran para mejorar tu experiencia en Merxsell.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // 1. Cierra este cuadro de diálogo animado
+                      Navigator.pop(dialogContext);
 
-    // Regresamos al menú principal
-    Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('¡Gracias por tu evaluación!')),
+                      // 2. Dispara el intent nativo (ej. abrir Correo o WhatsApp)
+                      final interop = context.read<DeviceInteropService>();
+                      interop.shareContent(buffer.toString(), subject: 'Resultados de Evaluación de Usuario');
+
+                      // 3. Regresa al menú principal (MasterListScreen)
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                    child: const Text('Continuar', style: TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
