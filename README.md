@@ -53,3 +53,5 @@ Después de compilar la versión v1.0 de Merxsell y ejecutar pruebas en un dispo
 
     Pregunta 6: ¿Qué tan probable es que recomiendes esta aplicación a otros usuarios?
     ⭐ Puntuación: 5/5
+
+Link apk: https://github.com/buhSound/fintech_workspace/releases/download/v1.0/merxsell-v1.0.apk
