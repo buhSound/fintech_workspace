@@ -1,3 +1,4 @@
+import 'package:fintech_workspace/domain/models/subscription.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'services/secure_storage_service.dart';
@@ -7,14 +8,22 @@ import 'ui/screens/login_screen.dart';
 import 'services/device_interop_service.dart';
 import 'ui/screens/root_screen.dart';
 import 'viewmodels/subscription_viewmodel.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const FintechApp());
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(SubscriptionAdapter());
+  final subscriptionBox = await Hive.openBox<Subscription>('subscriptionsBox');
+
+  runApp(FintechApp(subscriptionBox: subscriptionBox));
 }
 
 class FintechApp extends StatelessWidget{
-  const FintechApp({super.key});
+  final Box<Subscription> subscriptionBox;
+
+  const FintechApp({super.key, required this.subscriptionBox});
 
   @override
   Widget build(BuildContext context){
@@ -40,7 +49,7 @@ class FintechApp extends StatelessWidget{
           ),
 
           ChangeNotifierProvider<SubscriptionViewModel>(
-            create: (_) => SubscriptionViewModel(),
+            create: (_) => SubscriptionViewModel(box: subscriptionBox),
             ),
         ],
       child: MaterialApp(

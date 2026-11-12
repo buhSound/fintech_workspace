@@ -12,6 +12,13 @@ import 'add_subscription_screen.dart';
 class MasterListScreen extends StatelessWidget{
     const MasterListScreen({super.key});
 
+    String _formatCLP(int amount){
+        final str = amount.toString().replaceAllMapped(
+            RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+            (Match m) => '${m[1]}.',
+        );
+        return '\$ $str';
+    }
     @override 
     Widget build(BuildContext context){
         final subscriptionVM = context.watch<SubscriptionViewModel>();
@@ -46,21 +53,24 @@ class MasterListScreen extends StatelessWidget{
                         child: Column(
                             children: [
                                 Text(
-                                    'Gasto Mensual Estimado',
+                                    'Gasto Mensual Total',
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.8)
-                                    )
+                                        fontWeight: FontWeight.w500,
+                                        color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(1.0),
+                                        letterSpacing: 0.8,
+                                    ),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                    '\$ $totalGasto',
+                                    _formatCLP(totalGasto),
                                     style: TextStyle(
                                         fontSize: 40,
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context).colorScheme.onPrimaryContainer
                                     )
                                 ),
+
                             ],
                         ),
                     ),

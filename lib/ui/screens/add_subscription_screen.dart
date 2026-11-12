@@ -14,12 +14,14 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen>{
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _costController = TextEditingController();
+  final _sharedWithController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
   @override
   void dispose() {
     _nameController.dispose();
     _costController.dispose();
+    _sharedWithController.dispose();
     super.dispose();
   }
   Future<void> _pickDate(BuildContext context) async {
@@ -30,9 +32,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen>{
       lastDate: DateTime(2101),
     );
     if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
+      setState(() => _selectedDate = picked);
     }
   }
 
@@ -40,13 +40,20 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen>{
     if(_formKey.currentState!.validate()){
       final String newId = 'sub_${DateTime.now().millisecondsSinceEpoch}';
 
+      //transforma texto a lista
+      final List<String> sharedList = _sharedWithController.text
+        .split(',')
+        .map((name) => name.trim())
+        .where((name) => name.isNotEmpty)
+        .toList();
+
       final newSub = Subscription(
         id: newId,
         name: _nameController.text.trim(),
         monthlyCost: int.parse(_costController.text.trim()),
         nextBillingDate: _selectedDate,
         logoAssetPath: 'assets/images/card.png',
-        sharedWith: [],
+        sharedWith: sharedList,
       );
 
       context.read<SubscriptionViewModel>().addSubscription(newSub);
@@ -96,6 +103,15 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen>{
               ),
               const SizedBox(height: 24),
 
+              TextFormField(
+                controller: _sharedWithController,
+                decoration: const InputDecoration(
+                  labelText: 'Compartir con (nombres separados por coma)',
+                  hintText: 'Ej. Diego, Tobby, Gian',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.group_add),
+                ),
+              ),
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('Fecha del proximo cobro'),

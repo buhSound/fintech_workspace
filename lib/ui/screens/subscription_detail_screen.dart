@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../../services/device_interop_service.dart';
 import '../../domain/models/subscription.dart';
 
 class SubscriptionDetailScreen extends StatelessWidget{
@@ -123,6 +124,29 @@ class SubscriptionDetailScreen extends StatelessWidget{
                 title: Text(user, style: const TextStyle(fontWeight: FontWeight.w500)),
                 trailing: Text(_formatCLP(subscription.costPerPerson)),
               )),
+
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: theme.colorScheme.primary,
+                    foregroundColor: theme.colorScheme.onPrimary,
+                  ),
+                  onPressed: () {
+                    final interop = context.read<DeviceInteropService>();
+                    final quota = _formatCLP(subscription.costPerPerson);
+
+                    final message = '¡Hola! Ya se genero el cobro de ${subscription.name}. '
+                        'La cuota dividida es de $quota por persona.';
+
+                    interop.shareContent(message, subject: 'Cobro de ${subscription.name}');
+                  },
+                  icon: const Icon(Icons.share),
+                  label: const Text('Enviar Notificacion de Cobro', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ),
             ] else ...[
               Center(
                 child: Text(
