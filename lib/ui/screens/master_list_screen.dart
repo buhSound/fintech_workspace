@@ -9,6 +9,8 @@ import '../../viewmodels/auth_viewmodel.dart';
 
 import 'add_subscription_screen.dart';
 
+import 'evaluation_screen.dart';
+
 class MasterListScreen extends StatelessWidget{
     const MasterListScreen({super.key});
 
@@ -34,6 +36,16 @@ class MasterListScreen extends StatelessWidget{
                 centerTitle: false,
                 elevation: 0,
                 actions: [
+                    IconButton(
+                        icon: const Icon(Icons.rate_review),
+                        onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const EvaluationScreen()),
+                            );
+                        },
+                        tooltip: 'Evaluar App',
+                    ),
                     IconButton(
                         icon: const Icon(Icons.exit_to_app),
                         onPressed: () => context.read<AuthViewModel>().logout(),

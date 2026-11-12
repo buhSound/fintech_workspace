@@ -1,0 +1,52 @@
+{
+  "cumplimiento_hu": [
+    {
+      "id": "HU-01",
+      "titulo": "Pregunta 1: ¿Qué tan fácil fue completar el flujo principal de tu solución en la aplicación?",
+      "valor": 0,
+      "min": "1 estrella: Fue muy difícil o no logré completar el flujo principal.",
+      "max": "5 estrellas: Pude completar la tarea de forma rápida e intuitiva."
+    },
+    {
+      "id": "HU-02",
+      "titulo": "Pregunta 2: ¿El servicio móvil o hardware integrado respondió adecuadamente durante la prueba?",
+      "valor": 0,
+      "min": "1 estrella: El servicio falló, generó errores o bloqueó la aplicación.",
+      "max": "5 estrellas: El servicio operó de forma fluida y precisa."
+    }
+  ],
+  "usabilidad": [
+    {
+      "id": "UX-01",
+      "titulo": "Pregunta 3: ¿Cómo calificas la navegación y claridad visual de la interfaz gráfica?",
+      "valor": 0,
+      "min": "1 estrella: La interfaz es confusa, desordenada o difícil de entender.",
+      "max": "5 estrellas: La interfaz es clara, atractiva y facilita completamente el uso."
+    },
+    {
+      "id": "UX-02",
+      "titulo": "Pregunta 4: ¿La información y configuraciones persistieron correctamente al reabrir la app?",
+      "valor": 0,
+      "min": "1 estrella: Se perdieron los datos y configuraciones al cerrar la aplicación.",
+      "max": "5 estrellas: Toda la información se mantuvo intacta entre sesiones."
+    }
+  ],
+  "valoracion_general": [
+    {
+      "id": "VAL-01",
+      "titulo": "Pregunta 5: ¿El contenido y utilidad de la aplicación cumplieron con tus expectativas?",
+      "valor": 0,
+      "min": "1 estrella: El contenido no fue relevante ni útil para el problema planteado.",
+      "max": "5 estrellas: Superó mis expectativas y resuelve eficientemente la necesidad."
+    },
+    {
+      "id": "VAL-02",
+      "titulo": "Pregunta 6: ¿Qué tan probable es que recomiendes esta aplicación a otros usuarios?",
+      "valor": 0,
+      "min": "1 estrella: No la recomendaría en absoluto en su estado actual.",
+      "max": "5 estrellas: Definitivamente la recomendaría para uso real."
+    }
+
+
+  ]
+}

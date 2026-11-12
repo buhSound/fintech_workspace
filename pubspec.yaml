@@ -71,6 +71,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/dataFold/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -105,12 +106,12 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: assets/images/winton.png
+  image_path: assets/images/wolf.png
   min_sdk_android: 21
 
 flutter_native_splash:
   color: "#FFFFFF"
-  image: "assets/images/winton.png"
+  image: "assets/images/wolf.png"
   android_12:
-    image: "assets/images/winton.png"
+    image: "assets/images/wolf.png"
     icon_background_color: "#FFFFFF"
